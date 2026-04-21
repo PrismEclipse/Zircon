@@ -189,7 +189,7 @@ _CGB_FinishBattleScreenLayout:
 	call FillBoxCGB
 	hlcoord 0, 12, wAttrmap
 	ld bc, 6 * SCREEN_WIDTH
-	ld a, PAL_BATTLE_BG_TEXT
+	ld a, PAL_BATTLE_BG_PLAYER
 	call ByteFill
 	ld hl, BattleObjectPals
 	ld de, wOBPals1 palette PAL_BATTLE_OB_GRAY
@@ -410,6 +410,9 @@ BillsPC_PreviewTheme:
 	ld bc, wTempMonDVs
 	call GetPlayerOrMonPalettePointer
 	call LoadPalette_White_Col1_Col2_Black
+	xor a
+   ld [wBattleWeather], a
+	ld [wBattleTimeOfDay], a
 .GotPalette:
 	call WipeAttrmap
 	hlcoord 1, 4, wAttrmap
@@ -597,6 +600,9 @@ _CGB_UnownPuzzle:
 	ret
 
 _CGB_TrainerCard:
+       xor a
+	ld [wBattleWeather], a
+	ld [wBattleTimeOfDay], a
 	ld de, wBGPals1
 	xor a ; CHRIS
 	call GetTrainerPalettePointer

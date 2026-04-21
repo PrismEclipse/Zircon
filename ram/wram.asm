@@ -130,6 +130,9 @@ wSpriteUpdatesEnabled:: db
 wUnusedScriptByte:: db
 
 wMapTimeOfDay:: db
+wBattleTimeOfDay:: db
+wBattleTimeOfDayBackup:: db
+
 
 wPalFlags:: db
 
@@ -153,8 +156,6 @@ wScriptVar:: db
 
 wPlayerNextMovement:: db
 wPlayerMovement:: db
-
-	ds 2
 
 wMovementObject::
 	db
@@ -577,6 +578,9 @@ wBattleWeather::
 wWeatherCount::
 ; # turns remaining
 	db
+	
+wBattleWeatherBackup::
+   db 	
 
 wLoweredStat:: db
 wEffectFailed:: db
@@ -1624,12 +1628,6 @@ wPokegearMapRegion:: db
 wUnusedPokegearByte:: db
 
 NEXTU
-; pack
-wPackJumptableIndex:: db
-wCurPocket:: db
-wPackUsedItem:: db
-
-NEXTU
 ; trainer card badges
 wTrainerCardBadgeFrameCounter:: db
 wTrainerCardBadgeTileID:: db
@@ -1913,6 +1911,11 @@ wPalFadeMode:: db
 
 
 SECTION "WRAM 1", WRAMX
+
+ ; pack
+ wPackJumptableIndex:: db
+ wCurPocket:: db
+ wPackUsedItem:: db
 
 wGBCOnlyDecompressBuffer:: ; a $540-byte buffer that continues past this SECTION
 
