@@ -18,8 +18,6 @@ INCLUDE "engine/overworld/player_object.asm"
 
 SECTION "bank2", ROMX
 
-INCLUDE "engine/math/sine.asm"
-INCLUDE "engine/predef.asm"
 INCLUDE "engine/gfx/color.asm"
 
 
@@ -71,6 +69,8 @@ INCLUDE "engine/events/itemfinder.asm"
 SECTION "Square Root", ROMX
 
 INCLUDE "engine/math/get_square_root.asm"
+INCLUDE "engine/math/sine.asm"
+INCLUDE "engine/predef.asm"
 
 
 SECTION "Contests", ROMX
@@ -843,6 +843,9 @@ SECTION "Polished Fade System", ROMX
 
 INCLUDE "engine/gfx/fade.asm"
 
+SECTION "Time Of Day Images", ROMX
+
+INCLUDE "gfx/timeofday_images.asm"
 
 SECTION "Stadium 2 Checksums", ROMX[$7DE0], BANK[$7F]
 

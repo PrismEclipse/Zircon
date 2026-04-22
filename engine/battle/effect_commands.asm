@@ -813,7 +813,7 @@ BattleCommand_CheckObedience:
 
 .Print:
 	call StdBattleTextbox
-	jp .EndDisobedience
+	jr .EndDisobedience
 
 .UseInstead:
 ; Can't use another move if the monster only has one!
@@ -1556,13 +1556,13 @@ BattleCommand_DamageVariation:
 
 BattleCommand_CheckHit:
 	call .DreamEater
-	jp z, .Miss
+	jr z, .Miss
 
 	call .Protect
-	jp nz, .Miss
+	jr nz, .Miss
 
 	call .DrainSub
-	jp z, .Miss
+	jr z, .Miss
 
 	call .LockOn
 	ret nz
