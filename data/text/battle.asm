@@ -21,6 +21,11 @@ HookedPokemonAttackedText:
 	text_start
 	cont "attacked!"
 	prompt
+	
+BattleText_ShinyCantEscape:
+	text "It has a unique"
+	line "color!"
+	prompt	
 
 PokemonFellFromTreeText:
 	text_ram wEnemyMonNickname
@@ -725,6 +730,17 @@ AlreadyAsleepText:
 	line "already asleep!"
 	prompt
 
+AlreadyBurnedText:
+	text "<TARGET>'s"
+	line "already burned!"
+	prompt
+	
+AlreadyFrozenText:
+	text "<TARGET>'s"
+	line "already"
+	cont "frozen!"
+	prompt
+	
 WasPoisonedText:
 	text "<TARGET>"
 	line "was poisoned!"

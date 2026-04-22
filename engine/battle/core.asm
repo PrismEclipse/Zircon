@@ -3715,9 +3715,13 @@ TryToRunAwayFromBattle:
 	cp BATTLETYPE_CELEBI
 	jp z, .cant_escape
 	cp BATTLETYPE_FORCESHINY
-	jp z, .cant_escape
+	jp z, .shiny_cant_escape
 	cp BATTLETYPE_SUICUNE
 	jp z, .cant_escape
+
+; can't run from Shiny Pokemon
+	call BattleCheckEnemyShininess
+	jr c, .shiny_cant_escape
 
 	ld a, [wLinkMode]
 	and a
@@ -3730,6 +3734,13 @@ TryToRunAwayFromBattle:
 	ld a, [wEnemySubStatus5]
 	bit SUBSTATUS_CANT_RUN, a
 	jp nz, .cant_escape
+	
+.shiny_cant_escape
+	ld hl, BattleText_ShinyCantEscape
+	call StdBattleTextbox
+	call LoadTilemapToTempTilemap
+	and a
+	ret	
 
 	ld a, [wPlayerWrapCount]
 	and a
@@ -4720,6 +4731,24 @@ PrintPlayerHUD:
 	ld [hl], a
 
 .not_own_shiny	
+	; place floaticon
+	ld a, [wCurSpecies]
+	ld hl, FloatMons
+	call IsInByteArray
+	jr nc, .skip_floaticon
+	hlcoord 19, 8
+	ld [hl], "<float>"
+.skip_floaticon
+
+ld a, [wBattleMonItem]
+	cp NO_ITEM
+	jr z, .NoItemHeld
+
+	; Draw the held item icon
+	hlcoord 10, 8 ; coordinates of held item
+	ld [hl], $70 ; caught held icon
+.NoItemHeld:
+
 	ld a, TEMPMON
 	ld [wMonType], a
 	callfar GetGender
@@ -8504,57 +8533,6 @@ InitEnemyWildmon:
 	hlcoord 12, 0
 	lb bc, 7, 7
 	predef PlaceGraphic
-	ret
-
-FillEnemyMovesFromMoveIndicesBuffer: ; unreferenced
-	ld hl, wEnemyMonMoves
-	ld de, wListMoves_MoveIndicesBuffer
-	ld b, NUM_MOVES
-.loop
-	ld a, [de]
-	inc de
-	ld [hli], a
-	and a
-	jr z, .clearpp
-
-	push bc
-	push hl
-
-	push hl
-	dec a
-	ld hl, Moves + MOVE_PP
-	ld bc, MOVE_LENGTH
-	call AddNTimes
-	ld a, BANK(Moves)
-	call GetFarByte
-	pop hl
-
-	ld bc, wEnemyMonPP - (wEnemyMonMoves + 1)
-	add hl, bc
-	ld [hl], a
-
-	pop hl
-	pop bc
-
-	dec b
-	jr nz, .loop
-	ret
-
-.clear
-	xor a
-	ld [hli], a
-
-.clearpp
-	push bc
-	push hl
-	ld bc, wEnemyMonPP - (wEnemyMonMoves + 1)
-	add hl, bc
-	xor a
-	ld [hl], a
-	pop hl
-	pop bc
-	dec b
-	jr nz, .clear
 	ret
 
 ExitBattle:

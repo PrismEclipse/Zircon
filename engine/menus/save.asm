@@ -127,13 +127,6 @@ CompareLoadedAndSavedPlayerID:
 	ret
 
 SavedTheGame:
-	ld hl, wOptions
-	set NO_TEXT_SCROLL, [hl]
-	push hl
-	ld hl, .saving_text
-	call PrintText
-	pop hl
-	res NO_TEXT_SCROLL, [hl]
 	call SaveGameData
 	; copy the original text speed setting to the stack
 	ld a, [wOptions]
@@ -150,10 +143,6 @@ SavedTheGame:
 	ld de, SFX_SAVE
 	call WaitPlaySFX
 	jp WaitSFX
-
-.saving_text
-	text "SAVING…"
-	done
 
 SaveGameData:
 	ld a, TRUE

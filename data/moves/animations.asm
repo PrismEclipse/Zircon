@@ -3780,7 +3780,7 @@ BattleAnim_InSandstorm:
 .loop
 	anim_sound 0, 1, SFX_MENU
 	anim_wait 8
-	anim_loop 16, .loop
+	anim_loop 8, .loop
 	anim_wait 8
 	anim_ret
 
@@ -4533,7 +4533,7 @@ BattleAnim_InRain:
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $1
 	anim_wait 8
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $2
-	anim_wait 128
+	anim_wait 96
 	anim_ret
 
 BattleAnim_SunnyDay:
@@ -4546,7 +4546,7 @@ BattleAnim_InSun:
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $2
 	anim_wait 8
 	anim_obj BATTLE_ANIM_OBJ_RAIN, 88, 0, $2
-	anim_wait 128
+	anim_wait 96
 	anim_ret
 
 BattleAnim_MirrorCoat:

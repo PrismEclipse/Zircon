@@ -63,7 +63,7 @@ FindItemInBallScript::
 	jr z, .TMSound
 	ld de, SFX_ITEM
 	call PlaySFX
-	ld c, 120
+	ld c, 60
 	call DelayFrames
 	ret
 
