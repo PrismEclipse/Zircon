@@ -2380,7 +2380,7 @@ BattleCommand_CriticalText:
 	ld [wCriticalHit], a
 
 .wait
-	ld c, 20
+	ld c, 10
 	jp DelayFrames
 
 .texts
@@ -6644,8 +6644,8 @@ AnimateFailedMove:
 	jp BattleCommand_RaiseSub
 
 BattleCommand_MoveDelay:
-; Wait 40 frames.
-	ld c, 40
+; Wait 10 frames.
+	ld c, 10
 	jp DelayFrames
 
 BattleCommand_ClearText:
